@@ -1,0 +1,43 @@
+INSTRUCTIONS TO SETUP AND RUN THE PREDICTOR
+
+INSTALLATION
+- Download the ner_predict.zip file on your local machine
+- Unzip it
+- Open the Terminal on Mac or open the Command Prompt on Windows. 
+  For example download iTerm2 for Mac here: https://www.iterm2.com/downloads.html 
+  or see here for Windows 10: https://www.howtogeek.com/235101/10-ways-to-open-the-command-prompt-in-windows-10/ 
+- Navigate via the command line to the ner_predict folder, for example if it's the Downloads folder on Mac, run the following:
+	cd /Users/<your_username>/Downloads/ner_predict/
+  or on Windows:
+	cd C:\Users\<your_username>\downloads\ner_predict\
+  but it depends where you place the ner_predict folder
+- Make sure at least Python 3.6 is installed, run the following command:
+	python --version
+- If it outputs the version, and it's 3.6 or higher, then you are fine, otherwise go to the link below and follow the instructions there:
+	https://www.python.org/downloads/
+- Once Python 3 is installed, create a new virtual environment with the following command, on Mac and Linux:
+	python3 -m venv ner_env
+  if you are using Windows create the virtual enviroment with:
+	py -m venv ner_env
+  NOTE: if you are using Anaconda run instead:
+        conda create -n ner_env python=3.6 anaconda
+- Activate the newly created virtual environment (for virtualenv)  with:
+	source ner_env/bin/activate
+  if you are using Anaconda run instead:
+	source activate ner_env 
+- Install the dependencies with:
+	pip install -r requirements.txt
+- Add the EPPO API key token to your virtual environment by running the following command:
+	export EPPO_TOKEN=eca38f6546816d4fd947a63018d38c27
+  NOTE: this is my API key, you can add any API key generated after registering here: https://data.eppo.int/user/register
+- You have completed the setup!
+
+RUNNING THE PREDICTOR
+- Place the input files to be predicted inside the folders: ner_predict/input_files/plant/ and ner_predict/input_files/animal/ for plant and animal health articles respectively
+  NOTE: the files should be formatted exactly as specified in the Challenge Details, 
+	they can be JSON or TXT files but the structure needs to follow the same of the files provided with the challenge
+  NOTE: it is important that you place the files in the correct folder for plant and animal health articles respectively, otherwise the prediction will not work
+- The result files will be automatically saved in the ner_predict/results/ folder in JSON format
+- To run the script simply run in the command line (from inside the ner_predict folder):
+	python predictor.py --normalize
+  NOTE: the --normalize flag is optional, if you do not include it, normalization will not be performed and the process will be faster
